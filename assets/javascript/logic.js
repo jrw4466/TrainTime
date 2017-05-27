@@ -10,17 +10,25 @@ var config = {
 
  firebase.initializeApp(config);
 
- var database = firebase.database();
+ var dataRef = firebase.database();
 
  // Add Train Values
  var trainName = "";
  var destination = "";
  var time = 0;
- var frequency =0;
+ var frequency = 0;
+
+
+//function clearForm () {
+ 		//trainName = $("#train-input").empty();
+        //$("#destination-input").val().empty();
+        //$("#time-input").val().empty();
+        //$("#minutes-input").val().empty();
+	//};
 
 
     // Capture Add Train Values on Submit Button Click
-    $("#submit").on("click", function(event) {
+    $("#add-train").on("click", function(event) {
       event.preventDefault();
 
         trainName = $("#train-input").val().trim();
@@ -37,6 +45,7 @@ var config = {
         time: time,
         frequency: frequency,
       });
+      //clearForm();
     });
 
     // Firebase watcher + initial loader HINT: This code behaves similarly to .on("value")
