@@ -1,0 +1,23 @@
+* {
+	box-sizing: border-box;
+}
+
+#main-container{
+	width: 100%;
+	text-align: center;
+}
+
+.jumbotron{
+	background-color:#20315a;
+	color:white;
+	text-align: center;
+	padding: 20px;
+}
+
+.container {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  clear: both;
+}
+
