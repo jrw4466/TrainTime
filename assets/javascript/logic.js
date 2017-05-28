@@ -33,7 +33,7 @@ var config = {
 
         trainName = $("#train-input").val().trim();
         destination = $("#destination-input").val().trim();
-        time = parseInt($("#time-input").val().trim());
+        time = ($("#time-input").val().trim());
         frequency = parseInt($("#minutes-input").val().trim());
 
 
@@ -48,22 +48,35 @@ var config = {
       //clearForm();
     });
 
-    // Firebase watcher + initial loader HINT: This code behaves similarly to .on("value")
-    //dataRef.ref().on("child_added", function(childSnapshot) {
+    // Firebase return of Trains
+    dataRef.ref().on("child_added", function(snapshot) {
 
-     /* // Log everything that's coming out of snapshot
-      console.log(childSnapshot.val().name);
-      console.log(childSnapshot.val().name);
-      console.log(childSnapshot.val().email);
-      console.log(childSnapshot.val().age);
-      console.log(childSnapshot.val().comment);
-      console.log(childSnapshot.val().joinDate);
+    //Log everything that's coming out of snapshot
+    console.log(snapshot.val().trainName);
+    console.log(snapshot.val().destination);
+    console.log(snapshot.val().time);
+    console.log(snapshot.val().frequency);
 
-      // full list of items to the well
-      $("#full-member-list").append("<div class='well'><span id='name'> " + childSnapshot.val().name +
-        " </span><span id='email'> " + childSnapshot.val().email +
-        " </span><span id='age'> " + childSnapshot.val().age +
-        " </span><span id='comment'> " + childSnapshot.val().comment + " </span></div>");*/
+    var timeNow = moment().format("hh:mm a");
+    var timeDB = snapshot.val().time;
+    var minutesAway = timeNow - timeDB;
+    var timeX = moment(timeDB).format("X");
+    console.log(timeX);
 
-   
+
+    var rowDiv = $("<tr>")
+   	var tdName = $("<td>").text(snapshot.val().trainName);
+   	var tdDest = $("<td>").text(snapshot.val().destination);
+   	var tdTime = $("<td>").text(moment().format("hh:mm a"));
+   	var tdFreq = $("<td>").text(snapshot.val().frequency);
+
+   		rowDiv.append(tdName,tdDest,tdFreq,tdTime);
+
+    $("#holder").prepend(rowDiv);
+
+
+  });
+      
+
+ 
 
